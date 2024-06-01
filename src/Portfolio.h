@@ -6,15 +6,17 @@
 #define CYROTEZZAOUIA_PORTFOLIO_H
 
 #include <vector>
-#include "Deal.h"
+#include "Part.h"
 
 class Portfolio {
-public:
-    void addDeal(Deal deal);
-    // autres méthodes
-
 private:
-    std::vector<Deal> deals;
+    std::vector<Part> parts;
+
+public:
+    void addPart(const Part& part);
+    void displayPortfolioInfo();
+    std::vector<Part> getParts() const;
+    // Other necessary methods
 };
 
 #endif //CYROTEZZAOUIA_PORTFOLIO_H

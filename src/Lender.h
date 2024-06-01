@@ -8,12 +8,15 @@
 #include <string>
 
 class Lender {
-public:
-    Lender(std::string name);
-
 private:
     std::string name;
-};
 
+public:
+    Lender(const std::string& name);
+
+    std::string getName() const;
+    void displayLenderInfo();
+    // Other necessary methods
+};
 
 #endif //CYROTEZZAOUIA_LENDER_H

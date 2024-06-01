@@ -5,15 +5,22 @@
 #ifndef CYROTEZZAOUIA_PART_H
 #define CYROTEZZAOUIA_PART_H
 
+#include <string>
+
 class Part {
-public:
-    Part(double amount);
-
-    void makePayment(double payment);
-    // autres méthodes
-
 private:
     double amount;
+    std::string facilityId;
+
+public:
+    Part(double amount, const std::string& facilityId);
+
+    void reduceAmount(double reduction);
+    double getAmount() const;
+    void displayPartInfo();
+    std::string getFacilityId() const;
+    // Other necessary methods
 };
+
 
 #endif //CYROTEZZAOUIA_PART_H

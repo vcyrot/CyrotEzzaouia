@@ -8,11 +8,15 @@
 #include <string>
 
 class Borrower {
-public:
-    Borrower(std::string name);
-
 private:
     std::string name;
+
+public:
+    Borrower(const std::string& name);
+
+    std::string getName() const;
+    void displayBorrowerInfo();
+    // Other necessary methods
 };
 
 #endif //CYROTEZZAOUIA_BORROWER_H

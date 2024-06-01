@@ -15,4 +15,6 @@ add_executable(CyrotEzzaouia src/main.cpp
         src/Lender.cpp
         src/Lender.h
         src/Borrower.cpp
-        src/Borrower.h)
+        src/Borrower.h
+        src/Database.cpp
+        src/Database.h)

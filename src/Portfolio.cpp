@@ -3,8 +3,18 @@
 //
 
 #include "Portfolio.h"
+#include <iostream>
 
-void Portfolio::addDeal(Deal deal) {
-    deals.push_back(deal);
+void Portfolio::addPart(const Part& part) {
+    parts.push_back(part);
 }
 
+void Portfolio::displayPortfolioInfo() {
+    for (const auto& part : parts) {
+        part.displayPartInfo();
+    }
+}
+
+std::vector<Part> Portfolio::getParts() const {
+    return parts;
+}
