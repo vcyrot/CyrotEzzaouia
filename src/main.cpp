@@ -98,7 +98,7 @@ void displayLenders(Database& db) {
 }
 
 int main() {
-    Database db("localhost", "root", "password", "finance");
+    Database db("localhost", "cyrotezzaouia", "cyrotezzaouia", "DatabaseProject");
 
     int choice;
     do {
