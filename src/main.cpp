@@ -98,7 +98,13 @@ void displayLenders(Database& db) {
 }
 
 int main() {
-    Database db("localhost", "cyrotezzaouia", "cyrotezzaouia", "DatabaseProject");
+    std::string host = "localhost";  // Replace with your host
+    std::string user = "cyrotezzaouia";       // Replace with your MySQL username
+    std::string password = "cyrotezzaouia"; // Replace with your MySQL password
+    std::string dbname = "DatabaseProject";  // Replace with your database name
+    unsigned int port = 3306;        // Replace with your MySQL port if different
+
+    Database db(host, user, password, dbname, port);
 
     int choice;
     do {
@@ -128,4 +134,3 @@ int main() {
 
     return 0;
 }
-

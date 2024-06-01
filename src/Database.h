@@ -5,8 +5,6 @@
 #ifndef CYROTEZZAOUIA_DATABASE_H
 #define CYROTEZZAOUIA_DATABASE_H
 
-
-
 #include <mysql/mysql.h>
 #include <string>
 #include <vector>

@@ -9,18 +9,17 @@
 
 class Part {
 private:
-    double amount;
-    std::string facilityId;
+    std::string partNumber;
+    std::string description;
+    double price;
 
 public:
-    Part(double amount, const std::string& facilityId);
+    Part(const std::string& partNumber, const std::string& description, double price);
 
-    void reduceAmount(double reduction);
-    double getAmount() const;
-    void displayPartInfo();
-    std::string getFacilityId() const;
-    // Other necessary methods
+    // Mark the function as const
+    void displayPartInfo() const;
+
+    // Other member functions...
 };
-
 
 #endif //CYROTEZZAOUIA_PART_H
