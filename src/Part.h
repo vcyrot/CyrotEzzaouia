@@ -4,18 +4,14 @@
 #include <string>
 
 class Part {
-<<<<<<< HEAD
-=======
+
 private:
     std::string partNumber;
-    std::string description;
     double price;
 
->>>>>>> 0ff6d2f094d48f44e0f8cb025ace3c621b1f36aa
 public:
-    Part(const std::string& partNumber, const std::string& description, double price);
+    Part(const std::string& partNumber, double price);
 
-<<<<<<< HEAD
     void reduceAmount(double reduction);
     void displayPartInfo() const;
 
@@ -33,12 +29,7 @@ private:
 };
 
 #endif // PART_H
-=======
-    // Mark the function as const
-    void displayPartInfo() const;
 
-    // Other member functions...
-};
+    void displayPartInfo();
 
-#endif //CYROTEZZAOUIA_PART_H
->>>>>>> 0ff6d2f094d48f44e0f8cb025ace3c621b1f36aa
+

@@ -4,8 +4,8 @@
 #include "Deal.h"
 #include "Facility.h"
 #include "Part.h"
-#include "Portfolio.h"
 #include "Person.h"
+#include "Portfolio.h" // Ajout de l'inclusion de Portfolio.h
 
 void initializeData(
         std::vector<Deal>& deals,
@@ -14,34 +14,34 @@ void initializeData(
         std::vector<Person>& persons) {
 
     // Initialisation des deals
-    deals.push_back({"S1234", "Bank A", {"Bank C", "Bank D"}, "Air France", 1000000, "USD", "2024-01-01", "2030-01-01", "closed"});
-    deals.push_back({"B5678", "Bank B", {"Bank C", "Bank E"}, "Lufthansa", 2000000, "EUR", "2024-02-01", "2032-02-01", "closed"});
-    deals.push_back({"Z4321", "Bank C", {"Bank D", "Bank E"}, "Emirates", 3000000, "USD", "2024-03-01", "2031-03-01", "closed"});
+    deals.push_back(Deal("S1234", "Bank A", {"Bank C", "Bank D"}, Person("Air France", Person::Type::Borrower), 1000000, "USD", "2024-01-01", "2030-01-01", "closed"));
+    deals.push_back(Deal("B5678", "Bank B", {"Bank C", "Bank E"}, Person("Lufthansa", Person::Type::Borrower), 2000000, "EUR", "2024-02-01", "2032-02-01", "closed"));
+    deals.push_back(Deal("Z4321", "Bank C", {"Bank D", "Bank E"}, Person("Emirates", Person::Type::Borrower), 3000000, "USD", "2024-03-01", "2031-03-01", "closed"));
 
     // Initialisation des facilities
-    facilities.push_back({"2024-01-01", "2025-01-01", 500000, "USD", {"Bank C", "Bank D"}});
-    facilities.push_back({"2025-01-02", "2026-01-01", 500000, "USD", {"Bank C", "Bank D"}});
-    facilities.push_back({"2024-02-01", "2026-02-01", 1000000, "EUR", {"Bank C", "Bank E"}});
-    facilities.push_back({"2026-02-02", "2028-02-01", 1000000, "EUR", {"Bank C", "Bank E"}});
-    facilities.push_back({"2024-03-01", "2027-03-01", 1500000, "USD", {"Bank D", "Bank E"}});
-    facilities.push_back({"2027-03-02", "2030-03-01", 1500000, "USD", {"Bank D", "Bank E"}});
+    facilities.push_back(Facility("2024-01-01", "2025-01-01", 500000, "USD", {Person("Bank C", Person::Type::Lender), Person("Bank D", Person::Type::Lender)}));
+    facilities.push_back(Facility("2025-01-02", "2026-01-01", 500000, "USD", {Person("Bank C", Person::Type::Lender), Person("Bank D", Person::Type::Lender)}));
+    facilities.push_back(Facility("2024-02-01", "2026-02-01", 1000000, "EUR", {Person("Bank C", Person::Type::Lender), Person("Bank E", Person::Type::Lender)}));
+    facilities.push_back(Facility("2026-02-02", "2028-02-01", 1000000, "EUR", {Person("Bank C", Person::Type::Lender), Person("Bank E", Person::Type::Lender)}));
+    facilities.push_back(Facility("2024-03-01", "2027-03-01", 1500000, "USD", {Person("Bank D", Person::Type::Lender), Person("Bank E", Person::Type::Lender)}));
+    facilities.push_back(Facility("2027-03-02", "2030-03-01", 1500000, "USD", {Person("Bank D", Person::Type::Lender), Person("Bank E", Person::Type::Lender)}));
 
     // Initialisation des parts
-    parts.push_back({100000, 5000});
-    parts.push_back({200000, 10000});
-    parts.push_back({300000, 15000});
-    parts.push_back({400000, 20000});
-    parts.push_back({500000, 25000});
-    parts.push_back({600000, 30000});
+    parts.push_back(Part("S1234", 100000));
+    parts.push_back(Part("B5678", 200000));
+    parts.push_back(Part("Z4321", 300000));
+    parts.push_back(Part("S1234", 400000));
+    parts.push_back(Part("B5678", 500000));
+    parts.push_back(Part("Z4321", 600000));
 
     // Initialisation des personnes (lenders et borrowers)
-    persons.push_back({"Bank C", Person::Type::Lender, 1000000});
-    persons.push_back({"Bank D", Person::Type::Lender, 2000000});
-    persons.push_back({"Bank E", Person::Type::Lender, 1500000});
+    persons.push_back(Person("Bank C", Person::Type::Lender));
+    persons.push_back(Person("Bank D", Person::Type::Lender));
+    persons.push_back(Person("Bank E", Person::Type::Lender));
 
-    persons.push_back({"Air France", Person::Type::Borrower, 1000000});
-    persons.push_back({"Lufthansa", Person::Type::Borrower, 2000000});
-    persons.push_back({"Emirates", Person::Type::Borrower, 3000000});
+    persons.push_back(Person("Air France", Person::Type::Borrower));
+    persons.push_back(Person("Lufthansa", Person::Type::Borrower));
+    persons.push_back(Person("Emirates", Person::Type::Borrower));
 }
 
 void displayMainMenu() {
@@ -100,17 +100,13 @@ void addDeal(std::vector<Deal>& deals, const std::vector<Person>& persons) {
         pool.push_back(poolItem);
     }
 
-    deals.push_back({contractNumber, agent, pool, borrowerName, amount, currency, startDate, endDate, status});
+    deals.push_back(Deal(contractNumber, agent, pool, Person(borrowerName, Person::Type::Borrower), amount, currency, startDate, endDate, status));
     std::cout << "Deal ajouté avec succès." << std::endl;
 }
 
 void displayDeals(const std::vector<Deal>& deals) {
     for (const auto& deal : deals) {
-        std::cout << "Deal: " << deal.contractNumber
-                  << ", Agent: " << deal.agent
-                  << ", Borrower: " << deal.borrower
-                  << ", Amount: " << deal.projectAmount << " " << deal.currency
-                  << ", Status: " << deal.status << std::endl;
+        deal.displayDealInfo();
     }
 }
 
@@ -122,7 +118,7 @@ void addPerson(std::vector<Person>& persons, Person::Type type) {
     std::cout << "Entrez le montant: ";
     std::cin >> amount;
 
-    persons.push_back({name, type, amount});
+    persons.push_back(Person(name, type));
     std::cout << (type == Person::Type::Lender ? "Lender" : "Borrower") << " ajouté avec succès." << std::endl;
 }
 
@@ -136,22 +132,12 @@ void displayPersons(const std::vector<Person>& persons, Person::Type type) {
 }
 
 int main() {
-<<<<<<< HEAD
     std::vector<Deal> deals;
     std::vector<Facility> facilities;
     std::vector<Part> parts;
     std::vector<Person> persons;
 
     initializeData(deals, facilities, parts, persons);
-=======
-    std::string host = "localhost";  // Replace with your host
-    std::string user = "cyrotezzaouia";       // Replace with your MySQL username
-    std::string password = "cyrotezzaouia"; // Replace with your MySQL password
-    std::string dbname = "DatabaseProject";  // Replace with your database name
-    unsigned int port = 3306;        // Replace with your MySQL port if different
-
-    Database db(host, user, password, dbname, port);
->>>>>>> 0ff6d2f094d48f44e0f8cb025ace3c621b1f36aa
 
     int choice;
     do {
