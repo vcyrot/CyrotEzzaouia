@@ -1,37 +1,41 @@
-//
-// Created by Victoire on 27/05/2024.
-//
-
-#ifndef CYROTEZZAOUIA_FACILITY_H
-#define CYROTEZZAOUIA_FACILITY_H
-
+#ifndef FACILITY_H
+#define FACILITY_H
 
 #include <string>
 #include <vector>
-#include "Lender.h"
+#include "Person.h"
 
 class Facility {
+public:
+    Facility(const std::string& startDate, const std::string& endDate, double amount, const std::string& currency,
+             const std::vector<Person>& lenders);
+
+    void calculateInterest(double rate, int period);
+    void displayFacilityInfo() const;
+
+    // Getters
+    std::string getStartDate() const;
+    std::string getEndDate() const;
+    double getAmount() const;
+    double getInterest() const;
+    std::string getCurrency() const;
+    std::vector<Person> getLenders() const;
+
+    // Setters
+    void setStartDate(const std::string& startDate);
+    void setEndDate(const std::string& endDate);
+    void setAmount(double amount);
+    void setInterest(double interest);
+    void setCurrency(const std::string& currency);
+    void setLenders(const std::vector<Person>& lenders);
+
 private:
     std::string startDate;
     std::string endDate;
     double amount;
+    double interest;
     std::string currency;
-    std::vector<Lender> lenders;
-
-public:
-    Facility(const std::string& startDate, const std::string& endDate, double amount, const std::string& currency,
-             const std::vector<Lender>& lenders);
-
-    double calculateInterest(double rate, int period); // Example method for interest calculation
-    void displayFacilityInfo();
-    std::string getStartDate() const;
-    std::string getEndDate() const;
-    double getAmount() const;
-    std::string getCurrency() const;
-    std::vector<Lender> getLenders() const;
-    // Other necessary methods
+    std::vector<Person> lenders;
 };
 
-
-
-#endif //CYROTEZZAOUIA_FACILITY_H
+#endif // FACILITY_H

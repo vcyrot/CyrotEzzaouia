@@ -1,22 +1,23 @@
-//
-// Created by Victoire on 27/05/2024.
-//
+#ifndef PORTFOLIO_H
+#define PORTFOLIO_H
 
-#ifndef CYROTEZZAOUIA_PORTFOLIO_H
-#define CYROTEZZAOUIA_PORTFOLIO_H
-
-#include <vector>
 #include "Part.h"
+#include <vector>
 
 class Portfolio {
+public:
+    // Methodes
+    void addPart(const Part& part);
+    void displayPortfolioInfo() const;
+
+    // Getters
+    std::vector<Part> getParts() const;
+
+    // Setters
+    void setParts(const std::vector<Part>& parts);
+
 private:
     std::vector<Part> parts;
-
-public:
-    void addPart(const Part& part);
-    void displayPortfolioInfo();
-    std::vector<Part> getParts() const;
-    // Other necessary methods
 };
 
-#endif //CYROTEZZAOUIA_PORTFOLIO_H
+#endif // PORTFOLIO_H

@@ -1,7 +1,3 @@
-//
-// Created by Victoire on 27/05/2024.
-//
-
 #include "Part.h"
 #include <iostream>
 
@@ -15,15 +11,25 @@ void Part::reduceAmount(double reduction) {
     }
 }
 
-double Part::getAmount() const {
-    return amount;
-}
-
-void Part::displayPartInfo() {
+void Part::displayPartInfo() const {
     std::cout << "Facility ID: " << facilityId << std::endl;
     std::cout << "Amount: " << amount << std::endl;
 }
 
+// Getters
+double Part::getAmount() const {
+    return amount;
+}
+
 std::string Part::getFacilityId() const {
     return facilityId;
+}
+
+// Setters
+void Part::setAmount(double amount) {
+    this->amount = amount;
+}
+
+void Part::setFacilityId(const std::string& facilityId) {
+    this->facilityId = facilityId;
 }
