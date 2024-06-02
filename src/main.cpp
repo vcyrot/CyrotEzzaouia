@@ -136,12 +136,22 @@ void displayPersons(const std::vector<Person>& persons, Person::Type type) {
 }
 
 int main() {
+<<<<<<< HEAD
     std::vector<Deal> deals;
     std::vector<Facility> facilities;
     std::vector<Part> parts;
     std::vector<Person> persons;
 
     initializeData(deals, facilities, parts, persons);
+=======
+    std::string host = "localhost";  // Replace with your host
+    std::string user = "cyrotezzaouia";       // Replace with your MySQL username
+    std::string password = "cyrotezzaouia"; // Replace with your MySQL password
+    std::string dbname = "DatabaseProject";  // Replace with your database name
+    unsigned int port = 3306;        // Replace with your MySQL port if different
+
+    Database db(host, user, password, dbname, port);
+>>>>>>> 0ff6d2f094d48f44e0f8cb025ace3c621b1f36aa
 
     int choice;
     do {

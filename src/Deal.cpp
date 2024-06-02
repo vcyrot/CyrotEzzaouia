@@ -28,6 +28,7 @@ std::string Deal::getContractNumber() const {
     return contractNumber;
 }
 
+<<<<<<< HEAD
 std::string Deal::getAgent() const {
     return agent;
 }
@@ -96,3 +97,5 @@ void Deal::setEndDate(const std::string& endDate) {
 void Deal::setStatus(const std::string& status) {
     this->status = status;
 }
+=======
+>>>>>>> 0ff6d2f094d48f44e0f8cb025ace3c621b1f36aa
