@@ -5,7 +5,7 @@
 #include "Facility.h"
 #include "Part.h"
 #include "Person.h"
-#include "Portfolio.h" // Ajout de l'inclusion de Portfolio.h
+#include "Portfolio.h"
 
 void initializeData(
         std::vector<Deal>& deals,
@@ -51,7 +51,10 @@ void displayMainMenu() {
     std::cout << "4. Afficher les lenders\n";
     std::cout << "5. Ajouter un borrower\n";
     std::cout << "6. Afficher les borrowers\n";
-    std::cout << "7. Quitter\n";
+    std::cout << "7. Modifier un deal\n";
+    std::cout << "8. Supprimer un deal\n";
+    std::cout << "9. Rechercher des deals par borrower\n";
+    std::cout << "10. Quitter\n";
     std::cout << "Choisissez une option: ";
 }
 
@@ -131,6 +134,79 @@ void displayPersons(const std::vector<Person>& persons, Person::Type type) {
     }
 }
 
+void updateDeal(std::vector<Deal>& deals) {
+    std::string contractNumber;
+    std::cout << "Entrez le numéro de contrat du deal à modifier: ";
+    std::cin >> contractNumber;
+
+    for (auto& deal : deals) {
+        if (deal.getContractNumber() == contractNumber) {
+            std::string agent, currency, startDate, endDate, status;
+            double amount;
+
+            std::cout << "Entrez le nouvel agent: ";
+            std::cin >> agent;
+            std::cout << "Entrez la nouvelle monnaie: ";
+            std::cin >> currency;
+            std::cout << "Entrez la nouvelle date de début: ";
+            std::cin >> startDate;
+            std::cout << "Entrez la nouvelle date de fin: ";
+            std::cin >> endDate;
+            std::cout << "Entrez le nouveau statut: ";
+            std::cin >> status;
+            std::cout << "Entrez le nouveau montant: ";
+            std::cin >> amount;
+
+            deal.setAgent(agent);
+            deal.setCurrency(currency);
+            deal.setStartDate(startDate);
+            deal.setEndDate(endDate);
+            deal.setStatus(status);
+            deal.setAmount(amount);
+
+            std::cout << "Deal mis à jour avec succès." << std::endl;
+            return;
+        }
+    }
+
+    std::cout << "Deal non trouvé." << std::endl;
+}
+
+void deleteDeal(std::vector<Deal>& deals) {
+    std::string contractNumber;
+    std::cout << "Entrez le numéro de contrat du deal à supprimer: ";
+    std::cin >> contractNumber;
+
+    for (auto it = deals.begin(); it != deals.end(); ++it) {
+        if (it->getContractNumber() == contractNumber) {
+            deals.erase(it);
+            std::cout << "Deal supprimé avec succès." << std::endl;
+            return;
+        }
+    }
+
+    std::cout << "Deal non trouvé." << std::endl;
+}
+
+void searchDealsByBorrower(const std::vector<Deal>& deals) {
+    std::string borrowerName;
+    std::cout << "Entrez le nom du borrower pour rechercher les deals: ";
+    std::cin >> borrowerName;
+
+    bool found = false;
+    for (const auto& deal : deals) {
+        if (deal.getBorrower().getName() == borrowerName) {
+            deal.displayDealInfo();
+            found = true;
+        }
+    }
+
+    if (!found) {
+        std::cout << "Aucun deal trouvé pour ce borrower." << std::endl;
+    }
+}
+
+
 int main() {
     std::vector<Deal> deals;
     std::vector<Facility> facilities;
@@ -164,12 +240,22 @@ int main() {
                 displayPersons(persons, Person::Type::Borrower);
                 break;
             case 7:
+                updateDeal(deals);
+                break;
+            case 8:
+                deleteDeal(deals);
+                break;
+            case 9:
+                searchDealsByBorrower(deals);
+                break;
+            case 10:
                 std::cout << "Au revoir!" << std::endl;
                 break;
             default:
                 std::cout << "Choix invalide, veuillez réessayer." << std::endl;
         }
-    } while (choice != 7);
+    } while (choice != 10);
 
     return 0;
 }
+

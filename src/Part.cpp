@@ -4,7 +4,6 @@
 Part::Part(const std::string& partNumber, double price)
         : partNumber(partNumber), price(price) {}
 
-// Define the function as const
 void Part::displayPartInfo() const {
     std::cout << "Part Number: " << partNumber << "\n"
               << "Price: " << price << std::endl;

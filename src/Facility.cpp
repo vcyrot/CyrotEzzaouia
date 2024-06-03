@@ -6,7 +6,6 @@ Facility::Facility(const std::string& startDate, const std::string& endDate, dou
         : startDate(startDate), endDate(endDate), amount(amount), currency(currency), lenders(lenders), interest(0) {}
 
 void Facility::calculateInterest(double rate, int period) {
-    // Simple interest calculation
     interest =  (amount * rate * period) / 100;
 }
 

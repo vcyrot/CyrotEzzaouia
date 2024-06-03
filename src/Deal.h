@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "Person.h" // Remplace Borrower par Person
+#include "Person.h"
 
 class Deal {
 public:
